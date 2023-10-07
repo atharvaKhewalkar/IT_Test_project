@@ -91,7 +91,7 @@ function Login(){
               {/* Used for debuging */}
               {/* <p>{JSON.stringify(forms)}</p> */}
               </div>
-              
+
               
               <input type="text" onChange={handleFormName} name="fullName" placeholder="Full Name" />
               <input type="text" onChange={handleForm} name="rollNo" placeholder="Roll Number" />
