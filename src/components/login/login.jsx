@@ -61,7 +61,7 @@ function Login(){
               <div className='hello'>
               <h2>Hello... {fullname} !</h2>
               </div>
-              
+
               
               <input onChange={updatename} type="text" placeholder="Full Name" />
               <input type="text" placeholder="Roll Number" />
