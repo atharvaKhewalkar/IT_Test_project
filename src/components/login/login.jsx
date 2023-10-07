@@ -17,7 +17,7 @@ function Login(){
 
   // const signUpButton = document.getElementById('signUp');
   // const signInButton = document.getElementById('signIn');
-  // const container = document.getElementById('container');
+  // const container = document.getElementById('container'); Ritesh
 
   // signUpButton.addEventListener('click', () =>
   // container.classList.add('right-panel-active'));
