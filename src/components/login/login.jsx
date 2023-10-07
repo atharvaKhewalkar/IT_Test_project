@@ -4,20 +4,27 @@ import './login.css'
 
 function Login(){
 
+  const [forms, setForm] = useState({});
+
   function sendotp(){
     prompt("Enter OTP")
   }
 
   const [fullname,updatefullname]=useState("")
 
-  function updatename(event){
-    updatefullname(event.target.value)
+  //For Geeting data from input tags
+  function handleForm(e){
+    updatefullname(e.target.value);
+    setForm({
+      ...forms,
+      [e.target.name] : e.target.value
+    })
 
   }
 
   // const signUpButton = document.getElementById('signUp');
   // const signInButton = document.getElementById('signIn');
-  // const container = document.getElementById('container'); Ritesh
+  // const container = document.getElementById('container');
 
   // signUpButton.addEventListener('click', () =>
   // container.classList.add('right-panel-active'));
@@ -28,12 +35,26 @@ function Login(){
 
   const handleSignUpClick = () => {
     setIsSignUpActive(true);
+
   };
 
   const handleSignInClick = () => {
     setIsSignUpActive(false);
     
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('http://localhost:8080/signup', {
+      method: 'POST',
+      body:JSON.stringify(forms),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+    const data = await response.json();
+    console.log(data);
+  }
   
   return(
     <div className='loginpage'>    
@@ -56,20 +77,22 @@ function Login(){
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossOrigin="anonymous" />
         <div className={isSignUpActive ? 'right-panel-active container' : 'container'} id="container">
           <div className="form-container sign-up-container">
-            <form action="#">
+            <form onSubmit={handleSubmit}>
               <h1>Create Account</h1>
               <div className='hello'>
               <h2>Hello... {fullname} !</h2>
+              {/* Used for debuging */}
+              {/* <p>{JSON.stringify(forms)}</p> */}
               </div>
               
               
-              <input onChange={updatename} type="text" placeholder="Full Name" />
-              <input type="text" placeholder="Roll Number" />
-              <input type="email" placeholder="Email" />
+              <input type="text" onChange={handleForm} name="fullName" placeholder="Full Name" />
+              <input type="text" onChange={handleForm} name="rollNo" placeholder="Roll Number" />
+              <input type="email" onChange={handleForm} name="email" placeholder="Email" />
               <button onClick={sendotp} id="OTP">Send OTP</button>
               <input type="password" placeholder="Password" />
-              <input type="password" placeholder="Confirm Password" />
-              <button id="signUp">Sign Up</button>
+              <input type="password" onChange={handleForm} name="password" placeholder="Confirm Password" />
+              <button type='submit' id="signUp">Sign Up</button>
             </form>
           </div>
 
@@ -82,7 +105,7 @@ function Login(){
               </div>
               
               
-              <input onChange={updatename} type="text" placeholder="Full Name" />
+              <input onChange={handleForm} type="text" placeholder="Full Name" />
               <input type="text" placeholder="Roll Number" />
               <input type="email" placeholder="Email" />
               <input type="password" placeholder="Password" />
