@@ -14,12 +14,19 @@ function Login(){
 
   //For Geeting data from input tags
   function handleForm(e){
-    updatefullname(e.target.value);
     setForm({
       ...forms,
       [e.target.name] : e.target.value
     })
 
+  }
+
+  function handleFormName(e){
+    updatefullname(e.target.value);
+    setForm({
+      ...forms,
+      [e.target.name] : e.target.value
+    })
   }
 
   // const signUpButton = document.getElementById('signUp');
@@ -86,7 +93,7 @@ function Login(){
               </div>
               
               
-              <input type="text" onChange={handleForm} name="fullName" placeholder="Full Name" />
+              <input type="text" onChange={handleFormName} name="fullName" placeholder="Full Name" />
               <input type="text" onChange={handleForm} name="rollNo" placeholder="Roll Number" />
               <input type="email" onChange={handleForm} name="email" placeholder="Email" />
               <button onClick={sendotp} id="OTP">Send OTP</button>
